@@ -16,7 +16,7 @@ export default function Home(){
 
   return (<>
     <Header cartCount={0} />
-    <Navbar count={count}/>
+    //<Navbar count={count}/>
     <Hero/>
     <section id="products" className="bg-cream border-y">
       <div className="max-w-6xl mx-auto px-4 py-16">
