@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-//import Navbar from "../components/Navbar";
-import Header from "../components/Header";
+import Navbar from "../components/Navbar";
+//import Header from "../components/Header";
 import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 import DeliveryCheck from "../components/DeliveryCheck";
@@ -15,8 +15,8 @@ export default function Home(){
   const onAdd=(p)=>{ addToCart(p); setCount(c=>c+1); };
 
   return (<>
-    <Header cartCount={0} />
-    //<Navbar count={count}/>
+    //<Header cartCount={0} />
+    <Navbar count={count}/>
     <Hero/>
     <section id="products" className="bg-cream border-y">
       <div className="max-w-6xl mx-auto px-4 py-16">
