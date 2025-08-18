@@ -1,23 +1,21 @@
-# Good Morning Kitchen Website
+# Good Morning Kitchen — Polished Next.js Site (Lightweight)
 
-This is the Next.js + TailwindCSS website for Good Morning Kitchen.
+**What’s inside**
+- Tailwind (brand colors), hero, products, delivery checker, FAQ, footer
+- Cart + `/order` checkout with WhatsApp + UPI deep link
+- Tiny placeholder images: `/public/logo.png`, `/public/hero.png` (replace with real ones)
 
-## 🚀 How to run locally
-1. `npm install`
-2. `npm run dev`
-3. Visit http://localhost:3000
+**Run locally**
+```bash
+npm install
+npm run dev
+```
 
-## 🖼️ Replace images
-- Put your **logo** as `/public/logo.png`
-- Put your **hero food image** as `/public/hero.png`
+**Deploy**
+Push to GitHub → Import into Vercel → Deploy.
 
-## 🛒 Update products
-Edit `pages/index.js` → Products section.
-
-## 💳 Checkout
-- COD and UPI checkout available (placeholder only).
-- UPI QR VPA = `gmkgpay@upi` (replace later).
-
-## 🌐 Deployment
-Push to GitHub → Vercel will auto-deploy.
-
+**Replace images**
+Put your real files with the SAME names:
+- `/public/logo.png` (suggest ~200x200)
+- `/public/hero.png` (suggest ~1200x900)
+Vercel will auto-redeploy after commit.

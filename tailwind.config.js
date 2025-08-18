@@ -1,18 +1,18 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}"
-  ],
+  content: ["./pages/**/*.{js,jsx}", "./components/**/*.{js,jsx}"],
   theme: {
     extend: {
       colors: {
-        emerald: "#10B981",
-        orange: "#F97316",
-        brown: "#7C3E2D",
-        cream: "#FAF9F6",
-        olive: "#708238"
+        brand: "#689f38",    // earthy green from logo
+        accent: "#fbc02d",   // warm yellow-orange
+        choco:  "#5c3b2e",   // brown text
+        cream:  "#faf7ef"    // light background
+      },
+      boxShadow: {
+        card: "0 6px 20px rgba(0,0,0,0.08)"
       }
     }
   },
-  plugins: [],
-}
+  plugins: []
+};
