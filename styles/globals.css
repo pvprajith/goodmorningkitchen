@@ -1,7 +1,9 @@
-* { box-sizing: border-box; }
-body { margin: 0; font-family: sans-serif; color: #0f172a; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 10px; position: sticky; top: 0; z-index: 10; }
-.btn { padding: 8px 14px; border-radius: 8px; border: 1px solid #10b981; background: #10b981; color: white; font-weight: 600; cursor: pointer; }
-.btn.secondary { background: white; color: #10b981; }
-.card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin: 8px 0; }
+*{box-sizing:border-box;}
+body{margin:0;font-family:sans-serif;color:#0f172a;background:#fafafa;}
+.container{max-width:960px;margin:0 auto;padding:20px;}
+header{background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:10;padding:10px 0;}
+.btn{padding:8px 14px;border-radius:8px;border:1px solid #10b981;background:#10b981;color:white;font-weight:600;cursor:pointer;}
+.btn.secondary{background:white;color:#10b981;}
+.card{border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:8px 0;background:white;}
+input,textarea,select{padding:8px;border:1px solid #cbd5e1;border-radius:8px;width:100%;margin:4px 0;}
+footer{border-top:1px solid #e2e8f0;padding:20px;text-align:center;font-size:14px;color:#475569;background:#fff;}

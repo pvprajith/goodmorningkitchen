@@ -1,19 +1,17 @@
-# Good Morning Kitchen – Minimal Next.js Starter
-
-This is a lightweight Next.js project you can deploy to **Vercel** immediately.
+# Good Morning Kitchen – Full Next.js Site
 
 Features:
-- Home page with products + delivery checker
-- Cart system (localStorage)
-- `/order` page with checkout form
-- WhatsApp order integration
+- Home with delivery checker & products
+- Cart with qty edit/remove
+- Checkout `/order` with COD + UPI QR + WhatsApp integration
+- SEO meta, sitemap.xml, robots.txt
+- Footer with address & delivery time
 
 ## Run locally
-```bash
 npm install
 npm run dev
-```
 
-## Deploy
-Push to GitHub → Vercel → New Project → Import → Deploy
-Add domain `goodmorningkitchen.com` under Project → Settings → Domains
+## Deploy to Vercel
+Push to GitHub → Import in Vercel → Deploy → Add domain `goodmorningkitchen.com`
+
+UPI ID placeholder: `gmkgpay@upi` (change in pages/order.js when you have the real one).
