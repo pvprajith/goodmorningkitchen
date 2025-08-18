@@ -6,7 +6,7 @@ export default function Navbar({count=0}){
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/logo.png" alt="GMK logo" width={64} height={64} className="rounded-lg" />
+          <Image src="/logo.png" alt="GMK logo" width={72} height={72} className="rounded-lg" />
           <span className="font-semibold text-choco">Good Morning Kitchen</span>
         </Link>
         <nav className="hidden md:flex gap-6 text-sm text-choco/80">
