@@ -1,17 +1,23 @@
-# Good Morning Kitchen – Full Next.js Site
+# Good Morning Kitchen Website
 
-Features:
-- Home with delivery checker & products
-- Cart with qty edit/remove
-- Checkout `/order` with COD + UPI QR + WhatsApp integration
-- SEO meta, sitemap.xml, robots.txt
-- Footer with address & delivery time
+This is the Next.js + TailwindCSS website for Good Morning Kitchen.
 
-## Run locally
-npm install
-npm run dev
+## 🚀 How to run locally
+1. `npm install`
+2. `npm run dev`
+3. Visit http://localhost:3000
 
-## Deploy to Vercel
-Push to GitHub → Import in Vercel → Deploy → Add domain `goodmorningkitchen.com`
+## 🖼️ Replace images
+- Put your **logo** as `/public/logo.png`
+- Put your **hero food image** as `/public/hero.png`
 
-UPI ID placeholder: `gmkgpay@upi` (change in pages/order.js when you have the real one).
+## 🛒 Update products
+Edit `pages/index.js` → Products section.
+
+## 💳 Checkout
+- COD and UPI checkout available (placeholder only).
+- UPI QR VPA = `gmkgpay@upi` (replace later).
+
+## 🌐 Deployment
+Push to GitHub → Vercel will auto-deploy.
+
