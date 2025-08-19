@@ -18,8 +18,8 @@ export default function Header({ cartCount = 0 }) {
           <Image 
             src={Logo} 
             alt="Good Morning Kitchen Logo" 
-            width={70}  // bigger logo
-            height={70} 
+            width={80}  // bigger logo
+            height={80} 
             className="rounded-lg"
             priority
           />
