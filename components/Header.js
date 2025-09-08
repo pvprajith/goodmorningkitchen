@@ -26,8 +26,8 @@ export default function Header({ cartCount = 0 }) {
 
           {/* center the text vertically relative to the logo */}
           <div className="flex flex-col justify-center">
-            <div className="font-extrabold text-xl text-slate-800">{BRAND.name}</div>
-            <div className="text-sm text-slate-600 mt-2">{BRAND.tagline}</div>
+            <div className="font-extrabold text-xl text-slate-800 mt-3">{BRAND.name}</div>
+            <div className="text-sm text-slate-600 mt-0.5">{BRAND.tagline}</div>
           </div>
         </Link>
 
