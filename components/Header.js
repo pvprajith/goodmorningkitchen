@@ -1,11 +1,10 @@
-// components/Header.js
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../public/logo.png"; // Make sure this exists
 
 const BRAND = {
   name: "Good Morning Kitchen",
-  tagline: "Stone-ground. Fresh. Naturally Fermented.",
+  tagline: "Stone‑ground. Fresh. Naturally Fermented.",
   primaryHex: "#689f38",
 };
 

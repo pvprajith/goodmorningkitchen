@@ -1,4 +1,3 @@
-// components/MobileCartButton.js
 import Link from "next/link";
 
 export default function MobileCartButton({ count = 0 }) {
