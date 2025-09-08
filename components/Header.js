@@ -13,7 +13,7 @@ export default function Header({ cartCount = 0 }) {
     <header className="sticky top-0 z-50 bg-white border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-4">
-          <Image src={Logo} alt="Logo" width={70} height={70} className="rounded-lg" priority />
+          <Image src={Logo} alt="Logo" width={100} height={100} className="rounded-lg" priority />
           <div>
             <div className="font-extrabold text-xl text-slate-800">{BRAND.name}</div>
             <div className="text-sm text-slate-600">{BRAND.tagline}</div>
