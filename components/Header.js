@@ -13,13 +13,13 @@ export default function Header({ cartCount = 0 }) {
     <header className="sticky top-0 z-50 bg-white border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         
-        {/* Left: Logo + Name */}
+        {/* Left: Logo + Brand */}
         <Link href="/" className="flex items-center gap-4">
           <Image 
             src={Logo} 
             alt="Good Morning Kitchen Logo" 
-            width={80}  // bigger logo
-            height={80} 
+            width={70}   // bigger logo
+            height={70} 
             className="rounded-lg"
             priority
           />
@@ -41,14 +41,18 @@ export default function Header({ cartCount = 0 }) {
           <a href="#contact" className="hover:text-green-700">Contact</a>
           <Link
             href="/order"
-            className="px-4 py-2 border rounded-lg hover:bg-green-50 flex items-center gap-2"
+            className="relative px-4 py-2 border rounded-lg hover:bg-green-50 flex items-center gap-2"
             style={{ borderColor: BRAND.primaryHex }}
           >
-            Cart <span className="bg-green-600 text-white px-2 py-0.5 rounded-md text-sm">{cartCount}</span>
+            Cart
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-green-600 text-white px-2 py-0.5 rounded-full text-xs font-bold">
+                {cartCount}
+              </span>
+            )}
           </Link>
         </nav>
       </div>
     </header>
   );
 }
-
