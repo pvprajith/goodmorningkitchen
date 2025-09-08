@@ -1,16 +1,33 @@
 import '../styles/globals.css';
-import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import Header from '../components/Header';
+import MobileCartButton from '../components/MobileCartButton';
 
-export default function MyApp({Component, pageProps}){
-  return (<>
-    <Head>
-      <title>Good Morning Kitchen – Fresh Idli & Dosa Batter in Pune</title>
-      <meta name="description" content="Stone‑ground, naturally fermented Idli & Dosa batter. Delivered fresh every morning in Pune."/>
-      <meta property="og:title" content="Good Morning Kitchen – Fresh Batter Daily"/>
-      <meta property="og:description" content="Stone‑ground, naturally fermented batter delivered in Pune."/>
-      <meta property="og:type" content="website"/>
-      <meta property="og:image" content="/hero.png"/>
-    </Head>
-    <Component {...pageProps}/>
-  </>);
+function loadCartCount() {
+  if (typeof window === "undefined") return 0;
+  try {
+    const c = JSON.parse(localStorage.getItem('cart') || '[]');
+    return c.reduce((s, i) => s + (i.qty || 0), 0);
+  } catch {
+    return 0;
+  }
+}
+
+export default function MyApp({ Component, pageProps }) {
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    setCartCount(loadCartCount());
+    const onStorage = () => setCartCount(loadCartCount());
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
+  return (
+    <>
+      <Header cartCount={cartCount} />
+      <Component {...pageProps} />
+      <MobileCartButton count={cartCount} />
+    </>
+  );
 }
