@@ -25,7 +25,6 @@ export default function Order() {
 
   return (
     <>
-      <Header cartCount={cart.reduce((s,i)=>s+i.qty,0)} />
       <main className="max-w-6xl mx-auto px-4 py-14">
         <h1 className="text-3xl font-bold text-choco">Checkout</h1>
 
