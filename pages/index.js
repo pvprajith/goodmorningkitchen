@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header";
+//import Header from "../components/Header";
 import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 import DeliveryCheck from "../components/DeliveryCheck";
