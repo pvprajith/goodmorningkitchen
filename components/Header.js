@@ -15,8 +15,9 @@ export default function Header({ cartCount = 0 }) {
         <Link href="/" className="flex items-center gap-4">
           <Image src={Logo} alt="Logo" width={100} height={100} className="rounded-lg" priority />
           <div>
-            <div className="font-extrabold text-xl text-slate-800">{BRAND.name}</div>
-            <div className="text-sm text-slate-600">{BRAND.tagline}</div>
+           <div className="flex flex-col justify-center">
+                <div className="font-extrabold text-xl text-slate-800">{BRAND.name}</div>
+                <div className="text-sm text-slate-600">{BRAND.tagline}</div>
           </div>
         </Link>
         <nav className="hidden md:flex gap-8 text-base font-medium text-slate-700">
