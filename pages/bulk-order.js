@@ -1,59 +1,44 @@
 // pages/api/bulk-order.js
-import nodemailer from "nodemailer";
+// WhatsApp-only placeholder API for bulk-order requests.
+// No nodemailer or SMTP required.
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const {
-    productId, productName, kg, total, company, contactPerson, phone, email, address, notes
-  } = req.body || {};
-
-  if (!company || !phone || !kg) {
-    return res.status(400).json({ error: "Missing required fields" });
-  }
-
-  const body = `
-Bulk Order Request
-------------------
-Product: ${productName} (${productId})
-Quantity: ${kg} kg
-Estimated Total: ₹${total}
-
-Company: ${company}
-Contact Person: ${contactPerson}
-Phone: ${phone}
-Email: ${email}
-Address: ${address}
-
-Notes:
-${notes}
-`;
-
   try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT || 587),
-      secure: Number(process.env.SMTP_PORT) === 465,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
+    const {
+      productId,
+      productName,
+      kg,
+      unitPrice,
+      total,
+      company,
+      contactPerson,
+      phone,
+      email,
+      address,
+      notes,
+    } = req.body || {};
+
+    // Basic validation
+    if (!company || !phone || !kg) {
+      return res.status(400).json({ error: "Missing required fields (company, phone, kg)" });
+    }
+
+    // Log to Vercel function logs for future reference
+    console.log("Bulk order request:", {
+      productId, productName, kg, unitPrice, total, company, contactPerson, phone, email, address, notes
     });
 
-    const salesTo = process.env.SALES_EMAIL || "sales@goodmorningkitchen.com";
-
-    await transporter.sendMail({
-      from: `"Good Morning Kitchen" <${process.env.SMTP_USER}>`,
-      to: salesTo,
-      subject: `Bulk Order Request — ${company} — ${kg}kg`,
-      text: body,
+    // Respond success. The client will handle sending user to WhatsApp.
+    return res.status(200).json({
+      ok: true,
+      message: "Bulk order request received. Please complete via WhatsApp or we'll contact you shortly."
     });
-
-    return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error("bulk-order error:", err);
-    return res.status(500).json({ error: "Failed to send email" });
+    console.error("bulk-order handler error:", err);
+    return res.status(500).json({ error: "Internal server error" });
   }
 }
