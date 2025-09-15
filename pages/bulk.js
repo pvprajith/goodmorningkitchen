@@ -1,18 +1,20 @@
 // pages/bulk.js
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { PRODUCTS } from "../lib/cart"; // uses your existing PRODUCTS array
 
 const BRAND = { name: "Good Morning Kitchen", whatsapp: "919846530615" };
-const SAMPLE_PRODUCTS = [
-  { id: "idli-1kg", name: "Idli & Dosa Batter — 1 kg", price: 79 },
-  { id: "idli-2kg", name: "Idli & Dosa Batter — 2 kg", price: 149 },
-];
 
 export default function BulkOrder() {
-  const [productId, setProductId] = useState(SAMPLE_PRODUCTS[0].id);
-  const product = SAMPLE_PRODUCTS.find((p) => p.id === productId);
-  const [kg, setKg] = useState(10);
+  const router = useRouter();
+  const { productId: qpProductId, suggestedKg: qpSuggestedKg } = router.query;
+
+  const [productId, setProductId] = useState(PRODUCTS[0]?.id || "");
+  const product = PRODUCTS.find((p) => p.id === productId) || PRODUCTS[0] || { name: "", price: 0 };
+
+  const [kg, setKg] = useState(50);
   const [company, setCompany] = useState("");
   const [contact, setContact] = useState("");
   const [phone, setPhone] = useState("");
@@ -22,12 +24,23 @@ export default function BulkOrder() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
 
-  const total = (product ? product.price : 0) * (kg || 0);
+  useEffect(() => {
+    if (typeof qpProductId === "string") {
+      const found = PRODUCTS.find((p) => p.id === qpProductId);
+      if (found) setProductId(found.id);
+    }
+    if (qpSuggestedKg) {
+      const n = Number(qpSuggestedKg);
+      if (!isNaN(n) && n > 0) setKg(n);
+    }
+  }, [qpProductId, qpSuggestedKg]);
+
+  const total = (product?.launchPrice || product.price || 0) * (kg || 0);
 
   async function requestQuote(e) {
     e?.preventDefault();
     if (!company || !phone || !kg) {
-      setMessage({ type: "error", text: "Please fill company, phone and kg." });
+      setMessage({ type: "error", text: "Please fill company, phone and qty (kg)." });
       return;
     }
     setLoading(true);
@@ -40,7 +53,7 @@ export default function BulkOrder() {
           productId: product.id,
           productName: product.name,
           kg,
-          unitPrice: product.price,
+          unitPrice: product.launchPrice ?? product.price,
           total,
           company,
           contactPerson: contact,
@@ -51,10 +64,10 @@ export default function BulkOrder() {
         }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Request failed");
-      setMessage({ type: "success", text: data.message || "Request recorded." });
+      if (!res.ok) throw new Error(data?.error || "Request failed");
+      setMessage({ type: "success", text: data?.message || "Bulk request received. We'll contact you shortly." });
     } catch (err) {
-      setMessage({ type: "error", text: err.message || "Failed" });
+      setMessage({ type: "error", text: err.message || "Failed to send request." });
     } finally {
       setLoading(false);
     }
@@ -62,7 +75,7 @@ export default function BulkOrder() {
 
   function openWhatsApp() {
     if (!company || !phone || !kg) {
-      setMessage({ type: "error", text: "Please fill company, phone and kg before opening WhatsApp." });
+      setMessage({ type: "error", text: "Please fill company, phone and qty before opening WhatsApp." });
       return;
     }
     const lines = [
@@ -72,7 +85,7 @@ export default function BulkOrder() {
       `Phone: ${phone}`,
       `Product: ${product.name}`,
       `Qty (kg): ${kg}`,
-      `Unit price: ₹${product.price}`,
+      `Unit price: ₹${product.launchPrice ?? product.price}`,
       `Total: ₹${total}`,
       address ? `Address: ${address}` : "",
       notes ? `Notes: ${notes}` : "",
@@ -84,49 +97,57 @@ export default function BulkOrder() {
 
   return (
     <>
-      <Head><title>Bulk Order — Good Morning Kitchen</title></Head>
-      <main style={{ maxWidth: 900, margin: "30px auto", padding: "0 20px" }}>
-        <Link href="/"><a style={{ display: "inline-block", marginBottom: 20 }}>← Back</a></Link>
-        <h1>Bulk Order / B2B — Request a Quote</h1>
-        <div style={{ background: "#fff", padding: 20, borderRadius: 10, boxShadow: "0 6px 18px rgba(0,0,0,.06)" }}>
-          <form onSubmit={requestQuote}>
-            <label style={{ display: "block", marginBottom: 8 }}>Product</label>
-            <select value={productId} onChange={(e) => setProductId(e.target.value)} style={{ width: "100%", padding: 10 }}>
-              {SAMPLE_PRODUCTS.map((p) => <option key={p.id} value={p.id}>{p.name} — ₹{p.price}/kg</option>)}
+      <Head>
+        <title>Bulk Order — {BRAND.name}</title>
+      </Head>
+
+      <main className="max-w-4xl mx-auto px-4 py-12">
+        <Link href="/"><a className="text-sm underline">← Back to home</a></Link>
+        <h1 className="text-3xl font-bold mt-6">Bulk Order / B2B — Request a Quote</h1>
+
+        <div className="mt-6 bg-white p-6 rounded-lg shadow">
+          <form onSubmit={requestQuote} className="space-y-4">
+            <label className="block">Product</label>
+            <select value={productId} onChange={(e) => setProductId(e.target.value)} className="w-full p-3 border rounded">
+              {PRODUCTS.map(p => <option key={p.id} value={p.id}>{p.size} {p.name} — ₹{p.launchPrice ?? p.mrp}</option>)}
             </select>
-            <div style={{ display: "flex", gap: 12, marginTop: 12 }}>
-              <div style={{ flex: 1 }}>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
                 <label>Qty (kg)</label>
-                <input type="number" min="1" value={kg} onChange={(e) => setKg(Number(e.target.value || 0))} style={{ width: "100%", padding: 10 }} />
+                <input type="number" min="1" value={kg} onChange={(e) => setKg(Number(e.target.value || 0))} className="w-full p-3 border rounded" />
               </div>
-              <div style={{ flex: 1 }}>
+              <div>
                 <label>Estimated total</label>
-                <div style={{ padding: 10, fontWeight: 700 }}>₹{total}</div>
+                <div className="p-3 font-bold">₹{total}</div>
               </div>
             </div>
-            <hr style={{ margin: "16px 0" }} />
+
             <label>Company / Organisation *</label>
-            <input value={company} onChange={(e) => setCompany(e.target.value)} style={{ width: "100%", padding: 10, marginTop: 6 }} />
-            <label style={{ marginTop: 10 }}>Contact person</label>
-            <input value={contact} onChange={(e) => setContact(e.target.value)} style={{ width: "100%", padding: 10, marginTop: 6 }} />
-            <label style={{ marginTop: 10 }}>Phone (WhatsApp number) *</label>
-            <input value={phone} onChange={(e) => setPhone(e.target.value)} style={{ width: "100%", padding: 10, marginTop: 6 }} />
-            <label style={{ marginTop: 10 }}>Email</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: "100%", padding: 10, marginTop: 6 }} />
-            <label style={{ marginTop: 10 }}>Address</label>
-            <textarea value={address} onChange={(e) => setAddress(e.target.value)} rows={3} style={{ width: "100%", padding: 10, marginTop: 6 }} />
-            <label style={{ marginTop: 10 }}>Notes</label>
-            <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={2} style={{ width: "100%", padding: 10, marginTop: 6 }} />
-            <div style={{ display: "flex", gap: 10, marginTop: 18 }}>
-              <button type="button" onClick={openWhatsApp} style={{ background: "#2ea44f", color: "#fff", padding: "10px 18px", borderRadius: 8 }}>
-                Order via WhatsApp
-              </button>
-              <button type="submit" disabled={loading} style={{ background: "#ef9a1a", color: "#fff", padding: "10px 18px", borderRadius: 8 }}>
-                {loading ? "Requesting..." : "Request Quote (API)"}
-              </button>
+            <input value={company} onChange={(e)=>setCompany(e.target.value)} className="w-full p-3 border rounded" />
+
+            <label>Contact person</label>
+            <input value={contact} onChange={(e)=>setContact(e.target.value)} className="w-full p-3 border rounded" />
+
+            <label>Phone (WhatsApp number) *</label>
+            <input value={phone} onChange={(e)=>setPhone(e.target.value)} className="w-full p-3 border rounded" />
+
+            <label>Email</label>
+            <input value={email} onChange={(e)=>setEmail(e.target.value)} className="w-full p-3 border rounded" />
+
+            <label>Address</label>
+            <textarea value={address} onChange={(e)=>setAddress(e.target.value)} className="w-full p-3 border rounded" rows={3} />
+
+            <label>Notes</label>
+            <textarea value={notes} onChange={(e)=>setNotes(e.target.value)} className="w-full p-3 border rounded" rows={2} />
+
+            <div className="flex gap-3 mt-4">
+              <button type="button" onClick={openWhatsApp} className="flex-1 bg-green-600 text-white p-3 rounded">Order via WhatsApp</button>
+              <button type="submit" disabled={loading} className="flex-1 bg-yellow-500 text-white p-3 rounded">{loading ? "Sending..." : "Request Quote (API)"}</button>
             </div>
+
             {message && (
-              <div style={{ marginTop: 12, color: message.type === "error" ? "#c62828" : "#2e7d32" }}>
+              <div className={`mt-3 ${message.type==="error" ? "text-red-600":"text-green-700"}`}>
                 {message.text}
               </div>
             )}
