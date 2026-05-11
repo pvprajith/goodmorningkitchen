@@ -1,6 +1,6 @@
 export const PRODUCTS = [
-  { id: 'batter-1kg', name: 'Idli & Dosa Batter', size: '1 kg', price: 79 },
-  { id: 'batter-2kg', name: 'Idli & Dosa Batter', size: '2 kg', price: 149 }
+  { id: 'batter-1kg', name: 'Idli & Dosa Batter', size: '1 kg', price: 80 },
+  { id: 'batter-2kg', name: 'Idli & Dosa Batter', size: '2 kg', price: 150 }
 ];
 
 export function loadCart() {
