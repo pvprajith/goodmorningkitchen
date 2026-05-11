@@ -12,7 +12,7 @@ export default function Hero(){
         </p>
         <div className="mt-7 flex gap-3">
           <a href="#products" className="px-6 py-3 rounded-xl text-white font-medium shadow-lg" style={{background:"#689f38"}}>Shop Now</a>
-          <a href="https://wa.me/919846530615" className="px-6 py-3 rounded-xl border border-brand text-brand font-semibold">WhatsApp</a>
+          <a href="https://wa.me/919823552444" className="px-6 py-3 rounded-xl border border-brand text-brand font-semibold">WhatsApp</a>
         </div>
       </div>
       <div>
