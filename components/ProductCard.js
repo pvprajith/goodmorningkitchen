@@ -21,7 +21,7 @@ export default function ProductCard({ p, onAdd }) {
           <div className="mt-4 flex items-center justify-between">
             <div>
               <div className="line-through text-slate-400 text-xs">₹{p.mrp}</div>
-              <div className="text-xl font-bold text-choco">₹{p.launchPrice}</div>
+              <div className="text-xl font-bold text-choco">₹{p.price}</div>
             </div>
 
             <div className="flex gap-3 items-center">
