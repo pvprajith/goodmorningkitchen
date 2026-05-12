@@ -11,7 +11,7 @@ export default function Hero() {
         </h1>
 
         <p className="mt-5 text-lg text-choco/70">
-          Stone-ground. Naturally fermented. Soft idlis, crisp dosas—without
+          Freshly made. Naturally fermented. Soft idlis, crisp dosas—without
           the hassle.
         </p>
 
