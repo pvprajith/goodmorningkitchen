@@ -5,7 +5,7 @@ import Logo from "../public/logo.png"; // ensure this exists
 
 const BRAND = {
   name: "Good Morning Kitchen",
-  tagline: "Stone-ground. Fresh. Naturally Fermented.",
+  tagline: "Fresh. Naturally Fermented.",
   primaryHex: "#689f38",
 };
 
