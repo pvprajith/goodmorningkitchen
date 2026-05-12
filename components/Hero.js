@@ -23,12 +23,13 @@ export default function Hero(){
     +91 98235 52444
   </a>
 </div>
-          <a href="#products" 
-  className="px-4 py-2 rounded-lg text-sm font-medium text-white shadow-sm"
+          href="#products"
+  className="px-4 py-2 rounded-lg text-sm font-medium text-white shadow-none transition-all hover:scale-105"
   style={{background:"#689f38"}}
 >Shop Now</a>
-          <a href="https://wa.me/919823552444" 
-  className="px-4 py-2 rounded-lg border border-brand text-brand text-sm font-medium"
+          <a
+  href="https://wa.me/919823552444"
+  className="px-4 py-2 rounded-lg border border-brand text-brand text-sm font-medium transition-all hover:scale-105"
 >WhatsApp</a>
         </div>
       </div>
