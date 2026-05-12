@@ -17,10 +17,10 @@ export default function Hero(){
   </p>
 
   <a
-    href="tel:+91XXXXXXXXXX"
+    href="tel:+919823552444"
     className="text-3xl font-extrabold text-brand hover:underline"
   >
-    +91 XXXXX XXXXX
+    +91 98235 52444
   </a>
 </div>
           <a href="#products" className="px-6 py-3 rounded-xl text-white font-medium shadow-lg" style={{background:"#689f38"}}>Shop Now</a>
