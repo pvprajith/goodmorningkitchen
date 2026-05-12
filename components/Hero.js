@@ -13,7 +13,7 @@ export default function Hero(){
         <div className="mt-7 flex gap-3">
         <div className="mt-6">
   <p className="text-lg font-semibold text-gray-800">
-    📞 Call / WhatsApp Orders
+    📞 Order on Call or WhatsApp
   </p>
 
   <a
